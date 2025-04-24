@@ -1,6 +1,6 @@
-# Parallel Computing Experiments with MPI
+# Parallel Computing Experiments with MPI and CUDA
 
-This repository contains several parallel computing experiments implemented using MPI (Message Passing Interface). Each experiment demonstrates a different parallel computing technique.
+This repository contains several parallel and GPU-based computing experiments implemented using MPI and CUDA. Each experiment demonstrates different techniques in high-performance computing.
 
 ## Experiments Overview
 
@@ -59,40 +59,66 @@ This repository contains several parallel computing experiments implemented usin
 - Uses `MPI_Send` and `MPI_Recv` for process coordination.
 - Each process independently determines if a given number is prime.
 
+---
+
+### Assignment 4
+
+#### 1a. Combined Operations: Sum, Factorials, and Squares (`Q1a.c`)
+- A CUDA kernel that computes:
+  - Sum of first N integers using a single thread.
+  - Factorials of integers from 0 to N-1.
+  - Squares of integers from 0 to N-1.
+- Demonstrates multiple parallel computations in a single kernel using thread indices.
+
+#### 1b. Sum of First N Integers (`Q1b.c`)
+- A simple CUDA program to compute the sum of the first N integers using a single thread in a kernel.
+- Emphasizes the use of device memory and host-device communication.
+
+---
+
+### Assignment 6
+
+#### 2. GPU Square Root Computation with Output (`Q2.cpp`)
+- A CUDA program that computes the square root of each element in an array.
+- Outputs the square roots of each element to the console.
+- Demonstrates basic kernel execution and host-device memory management.
+
+#### 3. Timed Square Root Computation for Multiple Input Sizes (`Q3.c`)
+- Measures the time taken by a CUDA kernel to compute the square roots of elements in arrays of varying sizes.
+- Useful for performance analysis and understanding CUDA kernel execution timing.
+
+---
+
 ## How to Compile and Run
 
-Ensure you have MPI installed. You can compile and run the experiments using the following commands:
-
-### Compilation
+### MPI Programs
 ```sh
 mpicc Q1.c -o Q1
-mpicc Q2.c -o Q2
-mpicc Q3.c -o Q3
-mpicc Q4.c -o Q4
-mpicc Q5.c -o Q5
-mpicc Q6.c -o Q6
-mpicc Q7.c -o Q7
-mpicc Q8.c -o Q8
-```
-
-### Execution
-```sh
 mpirun -np <num_processes> ./Q1
-mpirun -np <num_processes> ./Q2
-mpirun -np <num_processes> ./Q3
-mpirun -np <num_processes> ./Q4
-mpirun -np <num_processes> ./Q5
-mpirun -np <num_processes> ./Q6
-mpirun -np <num_processes> ./Q7
-mpirun -np <num_processes> ./Q8
 ```
 
-Replace `<num_processes>` with the desired number of processes.
+### CUDA Programs
+```sh
+nvcc Q1a.c -o Q1a
+nvcc Q1b.c -o Q1b
+nvcc Q2.cpp -o Q2
+nvcc Q3.c -o Q3
+./Q1a
+./Q1b
+./Q2
+./Q3
+```
+
+Replace `<num_processes>` with the desired number of MPI processes.
+
+---
 
 ## Requirements
 - MPI Library (e.g., OpenMPI, MPICH)
-- C Compiler (e.g., GCC)
+- CUDA Toolkit and NVIDIA GPU
+- C/C++ Compiler (e.g., GCC, nvcc)
+
+---
 
 ## License
 This project is licensed under the MIT License.
-
